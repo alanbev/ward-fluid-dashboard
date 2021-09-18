@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+
 import './App.css';
+import patients from "./patients.js"
 
 function App() {
+  let patient_list=patients
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PatientList  data={patient_list} />
+    
   );
+}  
+
+
+
+function PatientList(props)
+{
+return(
+<Patient data= {props[1]} />
+)
+};
+
+
+function Patient(props)
+{
+  return(
+  <div>{props.patient_name}</div>
+  )
+
 }
+
+
+
+
 
 export default App;

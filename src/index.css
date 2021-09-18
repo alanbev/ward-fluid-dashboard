@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+span {
+  margin-right: 20px;
+}
+
+.hidden{
+  display: none;
+}
+.show{
+  display:block
+}
+
+.patient{
+border: solid black;
+background-color: lightgreen;
+}
+
+.bag{
+  display:block;
+  border:solid black;
+  background-color: blanchedalmond;
+}
