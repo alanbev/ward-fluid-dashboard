@@ -32,3 +32,6 @@ background-color: lightgreen;
   border:solid black;
   background-color: blanchedalmond;
 }
+show_button{
+  display:inline;
+}
