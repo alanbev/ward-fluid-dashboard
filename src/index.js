@@ -27,22 +27,14 @@ function Patient(props)
 {
 //initialise state
 const [on_fluids,setOnFluids]=useState(props.patient_data.on_iv_fluids);
-const [iv_status,setIvStatus]=useState(props.patient_data.iv_status);
 const [show_bags,setShowBags]=useState(false)
-const [bags_prescribed,setBagsPrescribed]= useState(props.patient_data.bags.length > 0)
+const [bags_prescribed,setBagsPrescribed]= useState(props.patient_data.bags.length)
 
-const show_bags_again=()=>{setShowBags(true)}
-const refresh=()=>{setShowBags(false); setInterval(()=>{show_bags_again()}, 10)}
-const change_fluid_status=()=>setOnFluids(on_fluids ? false : true)
+const decrement_bags=()=>{setBagsPrescribed(bags_prescribed-1)}
+const change_fluid_status=()=>{(setOnFluids(on_fluids ? false : true))}
+let on_fluids_message= (on_fluids?"On IV fluids" :"Not on IV fluids")
 
-let bagsClass=(show_bags ? "showbag" : "hidden")//calls CSS class according to show_bags state
-//setBagsPrescribed=()=>{(props.patient_data.bags.length >0 ? true : false }
-
-const take_down_bag=(position)=>{ props.patient_data.bags.splice(position,1); refresh() }///refreshes bag list ater cancel /takedown- calls funtion with time delay to force react to implement rerender (react is shortcutting rereder if no time delay!)
-
-
-const list_of_bags=props.patient_data.bags.map((eachbag, index)=><IvBag patient_data={props.patient_data} patient_in_array={props.patient_in_array} key={index} take_down_bag={take_down_bag} bag={eachbag} array_position={index}  />);
-
+const list_of_bags=props.patient_data.bags.map((eachbag, index)=><IvBag showstatus={props.showstatus} patient_data={props.patient_data}  key={index}  bag={eachbag} on_fluids={on_fluids} decrement_bags={decrement_bags}/>)
 
 
 return(
@@ -50,12 +42,12 @@ return(
  <div className="patient" id={props.patient_data.hosp_number} >
 
   <span id="patient-name_message">{props.patient_data.patient_name}</span>
-  <span id="on_fluid_message"> <StopStartFluidsButton click_function={change_fluid_status} message_from_patient={(on_fluids ?"On IV fluids" :"Not on IV fluids")} / > </span>
-  <span id="numb_bags_message">{`${props.patient_data.bags.length} bags prescribed`}</span>
-  <button onClick={()=>setShowBags(show_bags ? false : true)}> Show/Hide Bags </button> 
+  <span id="on_fluid_message"> <StopStartFluidsButton click_function={change_fluid_status} message_from_patient={on_fluids_message} / > </span>
+  <span id="numb_bags_message">{`${bags_prescribed} bags prescribed`}</span>
+  <button onClick={()=>{setShowBags(show_bags ? false : true)}}> Show/Hide Bags </button> 
 
   <div>
-  <div className={bagsClass}>{list_of_bags}</div>
+  <div className={(show_bags ? "show" : "hidden")}> {list_of_bags} </div>
   </div>
 
   </div>
@@ -69,24 +61,21 @@ const [bag_running, change_bag_running]=useState(false)
 const [vol_remaining, change_vol_remaining]=useState(props.bag.volume)
 const [start_time, change_start_time]= useState(Date)
 const [bag_started, change_bag_started] = useState(false)
+const [displaystatus,change_display_status]=useState("bag")
 //const [array_position, change_array_position] = useState(props.index)
 
 const show_volume=<BagVolume key={props.index} bag_running={bag_running} vol_remaining={vol_remaining} />
 
 const start_stop_bag=()=>{change_bag_running(bag_running ? false : true); change_bag_started(true) }
 
+const take_down_bag=()=>{change_display_status("hidden"); props.decrement_bags()}
 
-
-console.log(show_volume)
-//const show_volume =1000
-
-const take_down =  <StopStartFluidsButton click_function={props.take_down_bag} message_from_stopped_bag={bag_started} bag_running={bag_running} position_in_array={props.array_position} />
+const take_down =  <StopStartFluidsButton click_function={take_down_bag} message_from_stopped_bag={bag_started} bag_running={bag_running} position_in_array={props.array_position} />
 
 return(
-  <div className="bag">
+  <div className={displaystatus}>
     
     <span>Bag Id:-  {props.bag.bag_id}</span>
-    <span> {props.array_position} {(bag_started ? "started" :"not started")}</span>
     <span> {props.bag.fluid}  {props.bag.rate}  ml/hr</span> 
     <span>Volume remaining {show_volume}ml</span>
     <span>  <StopStartFluidsButton click_function={start_stop_bag} message_from_bag={(bag_running ? "Bag running" : "Bag not running")} /></span>
@@ -160,10 +149,9 @@ function BagVolume(props)
 
     if (bag_running && vol_remaining >0)
       {
-        const countdown=()=>{setInterval(call_change_vol_remaining, 1000)}
+        const countdown=()=>{setTimeout(call_change_vol_remaining, 1000)}
         countdown()
-        const cleanup=()=>{clearInterval(countdown)}
-       return()=>{cleanup()}
+       return()=>{clearTimeout(countdown)}
       } 
   },[bag_running, vol_remaining, props.bag_running])
 
