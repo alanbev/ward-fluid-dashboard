@@ -1,5 +1,6 @@
 
 import './App.css';
+import "index.css"
 import patients from "./patients.js"
 
 function App() {

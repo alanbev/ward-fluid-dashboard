@@ -2,8 +2,8 @@ let patients=
 [
         {
             bed:1,
-            hosp_number:1,
-            patient_name:"One Test",
+            hosp_number:11111111,
+            patient_name:"Mary Test",
             on_iv_fluids:true,
             iv_status:"prescribed",
             bags:
@@ -28,8 +28,8 @@ let patients=
         },
         {
             bed:2,
-            hosp_number:2,
-            patient_name:"Two Test",
+            hosp_number:2222222,
+            patient_name:"Henry Test",
             on_iv_fluids:true,
             iv_status:"prescribed",
             bags:
@@ -61,9 +61,9 @@ let patients=
                 ]
         },
         {
-            bed:2,
-            hosp_number:2,
-            patient_name:"Three Test",
+            bed:3,
+            hosp_number:333333,
+            patient_name:"Fred Test",
             on_iv_fluids:false,
             iv_status:"not_prescribed",
             bags:
