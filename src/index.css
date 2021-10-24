@@ -31,10 +31,7 @@ span {
   display:block
 }
 
-.patient{
-border: solid black;
-background-color: lightgreen;
-}
+
 
 .bag{
   display:block;
@@ -43,4 +40,24 @@ background-color: lightgreen;
 }
 .show_button{
   display:inline;
+}
+
+.green{
+border: solid black;
+background-color: lightgreen;
+}
+
+.red{
+  border: solid black;
+  background-color: lightcoral;
+}
+
+.amber{
+  border: solid black;
+  background-color: orange;
+}
+
+.white{
+  border: narrow ;
+  background-color: white;
 }
