@@ -28,9 +28,22 @@ span {
 }
 
 .show{
-  display:block
+  display:block;
+}
+#patient_name_message{
+  display:inline-block;
+  width: 100px;
 }
 
+#hosp_number{
+display: inline-block;
+width:70px;
+}
+
+#fluid{
+  display:inline-block;
+  width: 250px;
+}
 
 
 .bag{

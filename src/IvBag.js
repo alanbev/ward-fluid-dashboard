@@ -134,7 +134,7 @@ new_rate={setRate}/>
 return(
   <div className={displaystatus}>
     <span>Bag Id:-  {props.bag.bag_id}</span>
-    <span> {props.bag.fluid}  {rate}  ml/hr</span> 
+    <span id="fluid"> {props.bag.fluid}  {rate}  ml/hr</span> 
     <span>Volume remaining {show_volume}ml</span>
     <span className={showCheckBag ? "hidden" : "show_button"}> <StopStartFluidsButton  click_function={start_stop_bag} message_from_bag={(bag_running ? "Bag running" : "Bag not running")} /></span>
     <span className={(bag_started ? "show_button" :"hidden")}> <button className={checkduebutton.current} onClick={changeSetShowCheckFunction} > {(showCheckBag ? "Bag Check Complete" : "Check Bag")} </button></span>
