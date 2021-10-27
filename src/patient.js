@@ -14,7 +14,7 @@ const [display_alert, setDisplayAlert]=useState("hidden")
 const [alarm_state, setAlarmState]=useState("green")
 const [alert_message, setAlertMessage]=useState("")
 const [bag_check_due,setBagCheckDue]= useState(false)
-
+const [fluids_today,setFluidsToday]=useState(0)
 
 
 
@@ -34,6 +34,8 @@ const list_of_bags=props.patient_data.bags.map((eachbag, index)=><IvBag
   is_bag_running={setBagRunning}
   running_bags={bags_running}
   check_due={setBagCheckDue}
+  fluids_today={fluids_today}
+  setFluidsToday={setFluidsToday}
   />)
 
 
@@ -77,6 +79,7 @@ useEffect(()=>{
 },[on_fluids,bags_prescribed,bags_running,bag_check_due])
 
 console.log(alert_message)
+console.log(`total fluid infused${fluids_today}`)
 return(
   <div className={alarm_state} id={props.patient_data.hosp_number} >
   <span id="bed_number"> {`Bed ${props.patient_data.bed}`}</span>
@@ -86,7 +89,7 @@ return(
   <span id="numb_bags_message">{`${bags_prescribed} bags prescribed`}</span>
   <button onClick={()=>{setShowBags(show_bags ? false : true)}}> Show/Hide Bags </button> 
   <span> {bags_running} bag(s) running. </span>
-
+  <span id="checked_volume">Total checked volume: {fluids_today} ml</span>
   <div id="alertmessage" className={display_alert}>{alert_message}</div>
   <div className={(show_bags ? "show" : "hidden")}> {list_of_bags} </div>
   </div>

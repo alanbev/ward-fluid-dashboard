@@ -16,9 +16,10 @@ const changeSetCheckCorrect=()=>{
         {
         props.is_bag_running(props.running_bags-1) //decrements running bags since this is blocked in IV Bag during bag check to preent refresh error
         }
-    props.start_stop_bag(false)//stopsbag to prevent error during update
+    props.start_stop_bag(false)//stops bag to prevent error during update
 }
 useEffect(()=>{setCheckCorrect(true)},[Corrected_volume])
+
 
 
 const checkbagform=<CheckBagForm key={props.index} getVol={setCorrectedVolume} vol={Corrected_volume}/>

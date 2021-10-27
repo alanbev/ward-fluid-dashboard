@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-function BagVolume(props)
+function BagVolume(props, ref)
 {
   const [predicted_vol_remaining, change_predicted_vol_remaining]=useState(props.vol_remaining)
   const [bag_running,change_bag_running]=useState(props.bag_running)
@@ -12,12 +12,9 @@ useEffect(()=>
     const call_change_vol_remaining=()=>
       {
         change_predicted_vol_remaining(predicted_vol_remaining-1)
+        props.fluid_infused.current=predicted_vol_remaining
       }
 
-    if (predicted_vol_remaining===0)
-      {
-        props.detect_empty_bag(props.patient_bags_running-1)
-      }
 
     if (bag_running && predicted_vol_remaining >0)
       {
