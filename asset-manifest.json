@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ward-fluid-dashboard/static/css/main.d3ac8bee.chunk.css",
+    "main.js": "/ward-fluid-dashboard/static/js/main.a7e0ab15.chunk.js",
+    "main.js.map": "/ward-fluid-dashboard/static/js/main.a7e0ab15.chunk.js.map",
+    "runtime-main.js": "/ward-fluid-dashboard/static/js/runtime-main.4bfe6e84.js",
+    "runtime-main.js.map": "/ward-fluid-dashboard/static/js/runtime-main.4bfe6e84.js.map",
+    "static/js/2.0d875a67.chunk.js": "/ward-fluid-dashboard/static/js/2.0d875a67.chunk.js",
+    "static/js/2.0d875a67.chunk.js.map": "/ward-fluid-dashboard/static/js/2.0d875a67.chunk.js.map",
+    "static/js/3.cbd8920a.chunk.js": "/ward-fluid-dashboard/static/js/3.cbd8920a.chunk.js",
+    "static/js/3.cbd8920a.chunk.js.map": "/ward-fluid-dashboard/static/js/3.cbd8920a.chunk.js.map",
+    "index.html": "/ward-fluid-dashboard/index.html",
+    "static/css/main.d3ac8bee.chunk.css.map": "/ward-fluid-dashboard/static/css/main.d3ac8bee.chunk.css.map",
+    "static/js/2.0d875a67.chunk.js.LICENSE.txt": "/ward-fluid-dashboard/static/js/2.0d875a67.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4bfe6e84.js",
+    "static/js/2.0d875a67.chunk.js",
+    "static/css/main.d3ac8bee.chunk.css",
+    "static/js/main.a7e0ab15.chunk.js"
+  ]
+}
