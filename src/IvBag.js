@@ -9,20 +9,19 @@ import "./index.css"
 
 function IvBag(props)
 {
-const [bag_running, change_bag_running]=useState(false)
-const [vol_remaining, change_vol_remaining]=useState(props.bag.volume)
-const [bag_started, change_bag_started] = useState(false)
-const [displaystatus,change_display_status]=useState("bag")
-const [vol_from_correct, set_Vol_from_correct]=useState(props.bag.volume)
+const [bag_running, setBagRunning]=useState(false)
+const [vol_remaining, setVolRemaining]=useState(props.bag.volume)
+const [bag_started, setBagStarted] = useState(false)
+const [displaystatus,setDisplayStatus]=useState("bag")
+const [vol_from_correct, setVolFromCorrect]=useState(props.bag.volume)
 const [showCheckBag, setShowcheckBag]=useState(false)
 const [showAlterRate, setShowAlterRate]=useState(false)
 const [rate, setRate] = useState(props.bag.rate)
 const [checkDue, setCheckDue]= useState(false)
+const [new_fluid_left,setNewFluidLeft]=useState(props.bag.volume)
 const time_started_str=useRef()
 const checkduebutton=useRef("white")
 const fluid_infused=useRef(0)
-const [new_fluid_left,setNewFluidLeft]=useState(props.bag.volume)
-
 let start_time= new Date()
 const check_interval=30000
 
@@ -44,7 +43,7 @@ useEffect(()=>{
 
 useEffect(()=>{
   if (showCheckBag)
-  {change_vol_remaining(vol_from_correct)}
+  {setVolRemaining(vol_from_correct)}
 },[vol_from_correct,showCheckBag])
 
 
@@ -95,7 +94,7 @@ useEffect(()=>
 useEffect(()=>{fluid_infused.current=vol_from_correct},[vol_from_correct])//corrects infused volume reset during check
 
 useEffect(()=>{
-if (fluid_infused.current<=1)
+if (fluid_infused.current<=1)//fluid inflused runs one behind actual volume
 {
   start_stop_bag();
 }
@@ -114,19 +113,33 @@ const show_volume=<BagVolume
   />
 
 const start_stop_bag=()=>{
-change_bag_running(bag_running ? false : true); 
-change_bag_started(true)
+setBagRunning(bag_running ? false : true); 
+setBagStarted(true)
 }
 
 
 const take_down_bag=()=>{
+if (bag_started)
+{
   if (window.confirm("Please perform a bag volume check before taking down a bag (Click Check Bag, correct the volume then click Check Complete).  If you have done this press OK to take down the bag. If not, click Cancel and check the bag volume now"
   ))
   {
-change_display_status("hidden");
-props.decrement_bags(); 
+    takeDownBagAction()
   }
 }
+else
+{
+  takeDownBagAction()
+}
+}
+
+
+const takeDownBagAction=()=>
+  {
+setDisplayStatus("hidden");
+props.decrement_bags(); 
+  }
+
 
 const take_down = <StopStartFluidsButton
 click_function={take_down_bag}
@@ -148,10 +161,10 @@ setShowcheckBag(!showCheckBag);
 
 
 const checkbag = <CheckBag key={props.index} index={props.index}
-getVol={set_Vol_from_correct}
+getVol={setVolFromCorrect}
 vol={vol_from_correct}
 bag_running={bag_running}
-start_stop_bag={change_bag_running}
+start_stop_bag={setBagRunning}
 is_bag_running={props.is_bag_running}
 running_bags={props.running_bags} />
 
